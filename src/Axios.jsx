@@ -4,6 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import Modal from './Modal';
 
 export default function Axios(){
   const url = "https://66435c786c6a65658706c2f8.mockapi.io/todo/todoListData";
@@ -14,6 +15,7 @@ export default function Axios(){
   const [query, setQuery] = useState("");
   const [sortOrder, setSortOrder] = useState('asc');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [modalTask, setModalTask] = useState(null);
 
   useEffect(()=>{
     setLoading(true);
@@ -28,6 +30,14 @@ export default function Axios(){
         setLoading(false);
       });
   }, []);
+
+  const handleTaskClick = (task) => {
+    setModalTask(task);
+  };
+
+  const handleCloseModal = () => {
+    setModalTask(null);
+  };
 
   const handleSort = () => {
     const sortedData = [...taskdata].sort((a, b) => {
@@ -103,6 +113,7 @@ export default function Axios(){
   };
 
   const onDeleteTask = (id) =>{
+   
     setLoading(true);
     axios.delete(`${url}/${id}`)
     .then(() => {
@@ -110,6 +121,7 @@ export default function Axios(){
       setTaskData(deletedtask);
       toast.success('Task Deleted Successfully!');
       setLoading(false);
+      setModalTask(null);
     })
     .catch(error =>{
       console.log(error);
@@ -117,7 +129,8 @@ export default function Axios(){
       alert("Error Deleting Data", error);
       setLoading(false)
   })
-  }
+}
+  
     return(
         <>
         <ToastContainer position="top-center"/>
@@ -148,17 +161,18 @@ export default function Axios(){
                     <p className="loading-text">Loading....</p>
                 ) : 
                 (displayData.map((task) =>(
-                    <div className="task-list-item" key={task.id}>
+                    <div className="task-list-item" key={task.id}onClick={() => handleTaskClick(task)}>
                     <p className="task-text">{task.task}</p>
                     <div className="task-buttons">
                     <button className="task-edit-button" onClick={() =>{ setText(task.task); setEditingTaskId(task.id); }}>Edit</button>
-                    <button className="task-delete-button" onClick={() => onDeleteTask(task.id)}>Delete</button>
+                    <button className="task-delete-button" onClick={() =>  handleTaskClick(task)}>Delete</button>
                     </div>
                     </div>) 
                 ))}
                 </div>
             </div>
         </div>
+        <Modal isOpen={!!modalTask} task={modalTask} onClose={handleCloseModal} onDelete={onDeleteTask} />
     </>
     )
 }

@@ -1,0 +1,59 @@
+/* Modal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+  }
+
+  h2{
+    font-family:'Times New Roman', Times, serif;
+    text-align: left;
+  }
+
+  p{
+        font-size: 20px;
+        text-transform: capitalize;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+      
+
+  
+  .modal-buttons {
+    margin-top: 35px;
+  }
+  
+  .modal-delete-button, .modal-cancel-button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .modal-delete-button {
+    background: red;
+    color: white;
+  }
+  
+  .modal-cancel-button {
+    background: grey;
+    color: white;
+  }
+  

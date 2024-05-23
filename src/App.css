@@ -96,6 +96,7 @@
 
 .task-list-item {
   border: 1px solid #ccc;
+  cursor: pointer;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
@@ -223,3 +224,4 @@ input:checked + .theme-toggle {
 input:checked + .theme-toggle:before {
   transform: translateX(26px);
 }
+

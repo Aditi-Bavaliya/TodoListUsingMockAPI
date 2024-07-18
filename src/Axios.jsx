@@ -164,7 +164,7 @@ export default function Axios(){
                     <div className="task-list-item" key={task.id}onClick={() => handleTaskClick(task)}>
                     <p className="task-text">{task.task}</p>
                     <div className="task-buttons">
-                    <button className="task-edit-button" onClick={() =>{ setText(task.task); setEditingTaskId(task.id); }}>Edit</button>
+                    <button className="task-edit-button" onClick={(e) =>{ e.stopPropagation(); setText(task.task); setEditingTaskId(task.id); }}>Edit</button>
                     <button className="task-delete-button" onClick={() =>  handleTaskClick(task)}>Delete</button>
                     </div>
                     </div>) 
